@@ -7,3 +7,10 @@
     /* https://css-tricks.com/snippets/css/system-font-stack/ below: */
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
+#hero {
+    width: 900px;
+    margin: auto;
+    padding-top: 50px;
+    text-align: justify;
+}
