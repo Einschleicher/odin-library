@@ -1,3 +1,5 @@
+let myLibrary = [];
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -11,5 +13,15 @@ function Book(title, author, pages, read) {
     }
 }
 
-// const HarryPotter1 = new Book("Harry Potter: Erstes Buch", "Chrissi Rowling", 254, false);
-// console.log(HarryPotter1.info());
+userInputTitle = "test-t";
+userInputAuthor = "test-a";
+userInputPages = 123;
+userInputRead = false;
+
+function addBookToLibrary() {
+    const book = new Book(userInputTitle, userInputAuthor, userInputPages, userInputRead);
+    myLibrary.push(book);
+}
+
+addBookToLibrary();
+console.log(myLibrary)
