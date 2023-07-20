@@ -1,4 +1,4 @@
-let myLibrary = [];
+const myLibrary = [];
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -23,5 +23,16 @@ function addBookToLibrary() {
     myLibrary.push(book);
 }
 
+// const bookTable = document.querySelector("#books-table");
+
+// function displayLibrary() {
+//     for (book of myLibrary) {
+//         bookTable.textContent = "LOL";
+//     }
+// }
+
 addBookToLibrary();
-console.log(myLibrary)
+addBookToLibrary();
+addBookToLibrary();
+console.log(myLibrary);
+// displayLibrary();

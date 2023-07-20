@@ -8,9 +8,16 @@
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+h1 {
+    text-align: center;
+}
+
 #hero {
     width: 900px;
     margin: auto;
-    padding-top: 50px;
     text-align: justify;
+}
+
+#books-table {
+    margin-top: 30px;
 }
