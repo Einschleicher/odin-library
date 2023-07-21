@@ -13,26 +13,53 @@ function Book(title, author, pages, read) {
     }
 }
 
-userInputTitle = "test-t";
-userInputAuthor = "test-a";
-userInputPages = 123;
-userInputRead = false;
-
-function addBookToLibrary() {
-    const book = new Book(userInputTitle, userInputAuthor, userInputPages, userInputRead);
+function addBookToLibrary(title, author, pages, read) {
+    const book = new Book(title, author, pages, read);
     myLibrary.push(book);
 }
 
-// const bookTable = document.querySelector("#books-table");
+// Select table body
+const bookTableBody = document.querySelector("tbody");
 
-// function displayLibrary() {
-//     for (book of myLibrary) {
-//         bookTable.textContent = "LOL";
-//     }
-// }
+// Add books to table
+function displayLibrary() {
+    for (book of myLibrary) {
+        // Create table row
+        const tr = document.createElement("tr");
+        // Add table row
+        bookTableBody.appendChild(tr);
 
-addBookToLibrary();
-addBookToLibrary();
-addBookToLibrary();
+        // Select table row
+        // WRONG: Selects always the first tr in the body
+        // const bookTableRow = document.querySelector("tbody tr");
+
+        // RIGHT: Use this property instead
+        const BodyLastChild = bookTableBody.lastElementChild;
+
+        // Create table data element and fill content for each book-property
+        // PROBLEM: How to access property?
+        // for (let i = 0; i < 4; i++) {
+        //     const td = document.createElement("td");
+        //     BodyLastChild.appendChild(td);
+        //     BodyLastChild.lastElementChild.textContent = book.pages;
+        // }
+
+        let index = 4;
+
+        for (let property in book) {
+            if (index === 0) break;
+            const td = document.createElement("td");
+            BodyLastChild.appendChild(td);
+            BodyLastChild.lastElementChild.textContent = book[property];
+            index--;
+        }
+    }
+}
+
+addBookToLibrary("Extreme Ownership: How U.S. Navy SEALs Lead and Win", "Jocko Willink, Leif Babin", 317, true);
+addBookToLibrary("Can't Hurt Me: Master Your Mind and Defy the Odds", "David Goggins", 366, false);
+addBookToLibrary("The Principles of Object-Oriented JavaScript", "Nicholas C. Zakas", 120, false);
 console.log(myLibrary);
-// displayLibrary();
+displayLibrary();
+
+// TODO: Status is true/false instead of read/unread
