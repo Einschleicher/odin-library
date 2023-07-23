@@ -6,11 +6,12 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
 
-    readStatus = () => read ? "already read" : "not read yet";
+    // readStatus = () => read ? "already read" : "not read yet";
+    this.readStatus = () => read ? "already read" : "not read yet";
 
-    this.info = function() {
-        return `${title} by ${author}, ${pages} pages, ${readStatus()}`;
-    }
+    // this.info = function() {
+    //     return `${title} by ${author}, ${pages} pages, ${readStatus()}`;
+    // }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -50,7 +51,8 @@ function displayLibrary() {
             if (index === 0) break;
             const td = document.createElement("td");
             BodyLastChild.appendChild(td);
-            BodyLastChild.lastElementChild.textContent = book[property];
+            if (property !== "read") BodyLastChild.lastElementChild.textContent = book[property];
+            else BodyLastChild.lastElementChild.textContent = book.readStatus();
             index--;
         }
     }
@@ -62,4 +64,35 @@ addBookToLibrary("The Principles of Object-Oriented JavaScript", "Nicholas C. Za
 console.log(myLibrary);
 displayLibrary();
 
-// TODO: Status is true/false instead of read/unread
+const addBookButton = document.querySelector("#button-add");
+const formContainer = document.querySelector("#form-container");
+let buttonToggle = 0;
+
+let formHTML = `
+    <ul>
+    <label for="title">Title:</label>
+    <li><input type="text" id="title"></li>
+    <label for="author">Author:</label>
+    <li><input type="text" id="author"></li>
+    <label for="pages">Pages:</label>
+    <li><input type="number" id="pages"></li>
+    <label for="read">Status:</label>
+    <li><select id="read">
+        <option value="read">read</option>
+        <option value="not-read">not read</option>
+    </select></li>
+    </ul>`;
+
+addBookButton.addEventListener("click", () => {
+    if (buttonToggle !== 1) {
+        formContainer.innerHTML = formHTML;
+        addBookButton.textContent = "SUBMIT FORM";
+        buttonToggle = 1;
+    }
+    else {
+
+    }
+
+});
+
+// TODO: Add eventlistener when click on button -> form appears
