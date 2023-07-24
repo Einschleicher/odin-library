@@ -88,10 +88,6 @@ function displayLibrary() {
     })
 }
 
-// addBookToLibrary("Extreme Ownership: How U.S. Navy SEALs Lead and Win", "Jocko Willink, Leif Babin", 317, true);
-// addBookToLibrary("Can't Hurt Me: Master Your Mind and Defy the Odds", "David Goggins", 366, false);
-// addBookToLibrary("The Principles of Object-Oriented JavaScript", "Nicholas C. Zakas", 120, false);
-
 displayLibrary();
 
 const addBookButton = document.querySelector("#button-add");
@@ -125,13 +121,10 @@ addBookButton.addEventListener("click", () => {
         let author = document.querySelector("#author").value;
         let pages = document.querySelector("#pages").value;
         let read = document.querySelector("#read").value;
+        if (read !== "read") read = false;
         addBookToLibrary(title, author, pages, read);
         bookTableBody.innerText = "";
         displayLibrary();
         formContainer.innerHTML = formHTML;
     }
 });
-
-
-
-// TODO: Fix bug added status in form not working
