@@ -6,12 +6,7 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
 
-    // readStatus = () => read ? "already read" : "not read yet";
     this.readStatus = () => read ? "already read" : "not read yet";
-
-    // this.info = function() {
-    //     return `${title} by ${author}, ${pages} pages, ${readStatus()}`;
-    // }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -21,58 +16,67 @@ function addBookToLibrary(title, author, pages, read) {
 
 // Select table body
 const bookTableBody = document.querySelector("tbody");
+// Init variable to track amount of books
 let bookIndex = 0;
 
-
-// Add books to table
+// Display books in library
 function displayLibrary() {
     for (book of myLibrary) {
         // Create table row
         const tr = document.createElement("tr");
-        // Add table row
+        // Append table row
         bookTableBody.appendChild(tr);
 
-        // Select table row
-        // WRONG: Selects always the first tr in the body
-        // const bookTableRow = document.querySelector("tbody tr");
-
-        // RIGHT: Use this property instead
+        // Select last table row
         const BodyLastChild = bookTableBody.lastElementChild;
 
-        // Create table data element and fill content for each book-property
-        // PROBLEM: How to access property?
-        // for (let i = 0; i < 4; i++) {
-        //     const td = document.createElement("td");
-        //     BodyLastChild.appendChild(td);
-        //     BodyLastChild.lastElementChild.textContent = book.pages;
-        // }
-
+        // No of properties of a book to display in the table
         let index = 4;
 
+        // Create table data element and fill content for each book-property
         for (let property in book) {
+            // Exit loop for status, switch and delete
             if (index === 0) break;
+
+            // Create and append table data
             const td = document.createElement("td");
             BodyLastChild.appendChild(td);
+
+            // Add property content
             if (property !== "read") BodyLastChild.lastElementChild.textContent = book[property];
+            // Add readStatus()
             else BodyLastChild.lastElementChild.textContent = book.readStatus();
+            
             index--;
         }
+        
         const td = document.createElement("td");
         BodyLastChild.appendChild(td);
         BodyLastChild.lastElementChild.innerHTML = `<button class="delete" book-index="${bookIndex}">X</button>`;
         bookIndex++;
     }
     bookIndex = 0;
+
+    const deleteBookButtons = document.querySelectorAll(".delete");
+
+    deleteBookButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            myLibrary.splice(button.getAttribute("book-index"), 1);
+            bookTableBody.innerText = "";
+            displayLibrary();
+        })
+    })
 }
 
 addBookToLibrary("Extreme Ownership: How U.S. Navy SEALs Lead and Win", "Jocko Willink, Leif Babin", 317, true);
 addBookToLibrary("Can't Hurt Me: Master Your Mind and Defy the Odds", "David Goggins", 366, false);
 addBookToLibrary("The Principles of Object-Oriented JavaScript", "Nicholas C. Zakas", 120, false);
-console.log(myLibrary);
+
 displayLibrary();
 
 const addBookButton = document.querySelector("#button-add");
 const formContainer = document.querySelector("#form-container");
+
 let buttonToggle = 0;
 
 let formHTML = `
@@ -107,3 +111,6 @@ addBookButton.addEventListener("click", () => {
         formContainer.innerHTML = formHTML;
     }
 });
+
+
+
