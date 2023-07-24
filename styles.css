@@ -26,6 +26,14 @@ button {
     padding: 10px 20px;
 }
 
+.delete {
+    width: 30px;
+    height: 30px;
+    padding: 2px 2px;
+    color: darkred;
+    font-weight: bold;
+}
+
 #button-container {
     text-align: center;
     margin-top: 30px;

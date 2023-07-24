@@ -21,6 +21,8 @@ function addBookToLibrary(title, author, pages, read) {
 
 // Select table body
 const bookTableBody = document.querySelector("tbody");
+let bookIndex = 0;
+
 
 // Add books to table
 function displayLibrary() {
@@ -55,7 +57,12 @@ function displayLibrary() {
             else BodyLastChild.lastElementChild.textContent = book.readStatus();
             index--;
         }
+        const td = document.createElement("td");
+        BodyLastChild.appendChild(td);
+        BodyLastChild.lastElementChild.innerHTML = `<button class="delete" book-index="${bookIndex}">X</button>`;
+        bookIndex++;
     }
+    bookIndex = 0;
 }
 
 addBookToLibrary("Extreme Ownership: How U.S. Navy SEALs Lead and Win", "Jocko Willink, Leif Babin", 317, true);
