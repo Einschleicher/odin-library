@@ -90,9 +90,13 @@ addBookButton.addEventListener("click", () => {
         buttonToggle = 1;
     }
     else {
-
+        let title = document.querySelector("#title").value;
+        let author = document.querySelector("#author").value;
+        let pages = document.querySelector("#pages").value;
+        let read = document.querySelector("#read").value;
+        addBookToLibrary(title, author, pages, read);
+        bookTableBody.innerText = "";
+        displayLibrary();
+        formContainer.innerHTML = formHTML;
     }
-
 });
-
-// TODO: Add eventlistener when click on button -> form appears
