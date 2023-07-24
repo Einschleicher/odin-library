@@ -88,8 +88,7 @@ function displayLibrary() {
     })
 }
 
-displayLibrary();
-
+// Add book button (1st click: form appears, 2nd+ click: book gets added)
 const addBookButton = document.querySelector("#button-add");
 const formContainer = document.querySelector("#form-container");
 
