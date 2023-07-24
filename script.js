@@ -6,7 +6,7 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
 
-    this.readStatus = () => read ? "already read" : "not read yet";
+    this.readStatus = () => this.read ? "already read" : "not read yet";
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -50,27 +50,47 @@ function displayLibrary() {
             index--;
         }
         
-        const td = document.createElement("td");
-        BodyLastChild.appendChild(td);
+        // Add switch buttons
+        const tdSwitch = document.createElement("td");
+        BodyLastChild.appendChild(tdSwitch);
+        BodyLastChild.lastElementChild.innerHTML = `<button class="switch" book-index="${bookIndex}">X</button>`;
+
+        // Add delete buttons
+        const tdDelete = document.createElement("td");
+        BodyLastChild.appendChild(tdDelete);
         BodyLastChild.lastElementChild.innerHTML = `<button class="delete" book-index="${bookIndex}">X</button>`;
+
         bookIndex++;
     }
+    // Reset index after table has been drawn
     bookIndex = 0;
 
     const deleteBookButtons = document.querySelectorAll(".delete");
+    const switchBookButtons = document.querySelectorAll(".switch");
 
+    // Add logic to delete buttons
     deleteBookButtons.forEach(button => {
-        button.addEventListener("click", (event) => {
+        button.addEventListener("click", () => {
             myLibrary.splice(button.getAttribute("book-index"), 1);
+            bookTableBody.innerText = "";
+            displayLibrary();
+        })
+    })
+
+    // Add logic to switch buttons
+    switchBookButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const indexAttribute = button.getAttribute("book-index"); 
+            myLibrary[indexAttribute].read = !myLibrary[indexAttribute].read;
             bookTableBody.innerText = "";
             displayLibrary();
         })
     })
 }
 
-addBookToLibrary("Extreme Ownership: How U.S. Navy SEALs Lead and Win", "Jocko Willink, Leif Babin", 317, true);
-addBookToLibrary("Can't Hurt Me: Master Your Mind and Defy the Odds", "David Goggins", 366, false);
-addBookToLibrary("The Principles of Object-Oriented JavaScript", "Nicholas C. Zakas", 120, false);
+// addBookToLibrary("Extreme Ownership: How U.S. Navy SEALs Lead and Win", "Jocko Willink, Leif Babin", 317, true);
+// addBookToLibrary("Can't Hurt Me: Master Your Mind and Defy the Odds", "David Goggins", 366, false);
+// addBookToLibrary("The Principles of Object-Oriented JavaScript", "Nicholas C. Zakas", 120, false);
 
 displayLibrary();
 
@@ -114,3 +134,4 @@ addBookButton.addEventListener("click", () => {
 
 
 
+// TODO: Fix bug added status in form not working

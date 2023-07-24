@@ -26,12 +26,16 @@ button {
     padding: 10px 20px;
 }
 
-.delete {
+.delete, .switch {
     width: 30px;
     height: 30px;
     padding: 2px 2px;
     color: darkred;
     font-weight: bold;
+}
+
+.switch {
+    color: darkblue;
 }
 
 #button-container {
