@@ -1,12 +1,24 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
 
-    this.readStatus = () => this.read ? "already read" : "not read yet";
+//     this.readStatus = () => this.read ? "already read" : "not read yet";
+// }
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    readStatus() {
+        return this.read ? "already read" : "not read yet";
+    }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -72,7 +84,7 @@ function displayLibrary() {
     deleteBookButtons.forEach(button => {
         button.addEventListener("click", () => {
             myLibrary.splice(button.getAttribute("book-index"), 1);
-            bookTableBody.innerText = "";
+            bookTableBody.textContent = "";
             displayLibrary();
         })
     })
@@ -82,7 +94,7 @@ function displayLibrary() {
         button.addEventListener("click", () => {
             const indexAttribute = button.getAttribute("book-index"); 
             myLibrary[indexAttribute].read = !myLibrary[indexAttribute].read;
-            bookTableBody.innerText = "";
+            bookTableBody.textContent = "";
             displayLibrary();
         })
     })
@@ -122,7 +134,7 @@ addBookButton.addEventListener("click", () => {
         let read = document.querySelector("#read").value;
         if (read !== "read") read = false;
         addBookToLibrary(title, author, pages, read);
-        bookTableBody.innerText = "";
+        bookTableBody.textContent = "";
         displayLibrary();
         formContainer.innerHTML = formHTML;
     }
